@@ -4,5 +4,6 @@ const resource = '/auth';
 export default {
     postSignUp(DTO){
         console.log(DTO)
+        return Repository.post(`${resource}/signup` , DTO);
     }
 };
