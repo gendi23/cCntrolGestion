@@ -2,22 +2,7 @@
   <div class="auth-wrapper auth-v1">
     <div class="auth-inner">
       <v-card class="auth-card">
-        <!-- logo -->
-       <!-- <v-card-title class="d-flex align-center justify-center py-7">
-          <router-link to="/" class="d-flex align-center">
-            <v-img
-              :src="require('@/assets/images/logos/logo.svg').default"
-              max-height="30px"
-              max-width="30px"
-              alt="logo"
-              contain
-              class="me-3"
-            ></v-img>
-
-            <h2 class="text-2xl font-weight-semibold">Materio</h2>
-          </router-link>
-        </v-card-title>-->
-
+      
         <!-- title -->
         <v-card-text  class="d-flex justify-center">
           <p class="text-2xl font-weight-semibold text--primary mb-2">Cadastro</p>
@@ -28,14 +13,21 @@
         <v-card-text>
           <v-form>
             <v-text-field
-              v-model="username"
+              v-model="nome"
               outlined
               label="Nome"
-              placeholder="JohnDoe"
+              placeholder="John "
               hide-details
               class="mb-3"
             ></v-text-field>
-
+            <v-text-field
+              v-model="sobrenome"
+              outlined
+              label="Sobrenome"
+              placeholder="Sobrenome"
+              hide-details
+              class="mb-3"
+            ></v-text-field>
             <v-text-field
               v-model="email"
               outlined
@@ -44,32 +36,25 @@
               hide-details
               class="mb-3"
             ></v-text-field>
+            
              <v-text-field
-              v-model="email"
-              outlined
-              label="Sobrenome"
-              placeholder="john@example.com"
-              hide-details
-              class="mb-3"
-            ></v-text-field>
-             <v-text-field
-              v-model="email"
+              v-model="empresa"
               outlined
               label="Empresa"
-              placeholder="john@example.com"
+              placeholder="Empresa"
               hide-details
               class="mb-3"
             ></v-text-field>
              <v-text-field
-              v-model="email"
+              v-model="endereco"
               outlined
               label="Endereço"
-              placeholder="john@example.com"
+              placeholder="Endereço"
               hide-details
               class="mb-3"
             ></v-text-field>
             <v-text-field
-              v-model="password"
+              v-model="senha"
               outlined
               :type="isPasswordVisible ? 'text' : 'password'"
               label="Senha"
@@ -79,7 +64,7 @@
               @click:append="isPasswordVisible = !isPasswordVisible"
             ></v-text-field>
 
-            <v-btn block color="primary" class="mt-6"> Sign Up </v-btn>
+            <v-btn block color="primary" class="mt-6" @click="submit"> Sign Up </v-btn>
           </v-form>
         </v-card-text>
 
@@ -89,21 +74,6 @@
           <router-link :to="{ name: 'login' }"> Sign in instead </router-link>
         </v-card-text>
 
-        <!-- divider 
-        <v-card-text class="d-flex align-center mt-2">
-          <v-divider></v-divider>
-          <span class="mx-5">or</span>
-          <v-divider></v-divider>
-        </v-card-text>-->
-
-        <!-- social link 
-        <v-card-actions class="d-flex justify-center">
-          <v-btn v-for="link in socialLink" :key="link.icon" icon class="ms-1">
-            <v-icon :color="$vuetify.theme.dark ? link.colorInDark : link.color">
-              {{ link.icon }}
-            </v-icon>
-          </v-btn>
-        </v-card-actions>-->
       </v-card>
     </div>
 
@@ -131,6 +101,8 @@
 // eslint-disable-next-line object-curly-newline
 import { mdiFacebook, mdiTwitter, mdiGithub, mdiGoogle, mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import { RepositoryFactory } from '@/repositories/RepositoryFactory';
+const AuthRepository = RepositoryFactory.get('auth');
 
 export default {
   setup() {
@@ -172,6 +144,32 @@ export default {
         mdiEyeOutline,
         mdiEyeOffOutline,
       },
+    }
+  },
+  data() {
+    return {
+      nome: "",
+      sobrenome:"",
+      email:"",
+      empresa:"",
+      endereco:"",
+      senha:"",
+    }
+  },
+  methods: {
+    submit() {
+        const DTO = {
+          nome:this.nome +' '+ this.sobrenome,
+          email : this.email ,
+          empresa:this.empresa,
+          endereco:this.endereco,
+          senha : this.senha
+        }
+        this.postSignUp(DTO);
+    },
+    async postSignUp(data){
+      let response = undefined;
+      response = await AuthRepository.postSignUp(data)
     }
   },
 }

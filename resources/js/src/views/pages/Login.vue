@@ -54,7 +54,7 @@
               <a href="javascript:void(0)" class="mt-1"> Forgot Password? </a>
             </div>
 
-            <v-btn block color="primary" class="mt-6" @click="submit"> Login </v-btn>
+            <v-btn block color="primary" class="mt-6" > Login </v-btn>
             <v-card-text class="d-flex align-center justify-center flex-wrap mt-2">
               <router-link :to="{ name: 'register' }"> Cadastre-se </router-link>
             </v-card-text>
@@ -160,10 +160,10 @@ export default {
         }
         this.postSignUp(DTO);
       },
-      async postSignUp(data){
+      /* async postSignUp(data){
         let response = undefined;
         response = await AuthRepository.postSignUp(data)
-      }
+      } */
   },
 }
 </script>

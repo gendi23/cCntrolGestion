@@ -18,9 +18,17 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'empresa_id',
+        'role_id',
         'name',
         'email',
         'password',
+        'token_password',
+        'token_email',
+        'is_active',
+        'is_primary',
+        'is_verified',
+        'notifications'
     ];
 
     /**
@@ -41,4 +49,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const ADMIN = 1;
+    const ARMADOR = 2;
+    const AUDITOR = 3;
+
+    public static function isAdmin(){
+        return Auth::user()->role_id === self::ADMIN;
+    }
+
+    public static function isArmador(){
+        return Auth::user()->role_id === self::ARMADOR;
+    }
+
+    public static function isAdminMaritimo(){
+        return Auth::user()->role_id === self::AUDITOR;
+    }
+    /* Foreign Keys */
+
+    public function empresa(){
+        return $this->belongsto('App\Models\Empresa', 'empresa_id');
+    }
+
+    public function role(){
+        return $this->belongsto('App\Models\Role', 'role_id');
+    }
 }
