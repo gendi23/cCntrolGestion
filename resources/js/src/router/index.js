@@ -60,6 +60,22 @@ const routes = [
     },
   },
   {
+    path: '/forgot-password',
+    name: 'forgot-password',
+    component: () => import('@/views/pages/ForgotPassword.vue'),
+    meta: {
+      layout: 'blank',
+    },
+  },
+  {
+    path: '/recover-password',
+    name: 'recover-password',
+    component: () => import('@/views/pages/RecoverPassword.vue'),
+    meta: {
+      layout: 'blank',
+    },
+  },
+  {
     path: '/error-404',
     name: 'error-404',
     component: () => import('@/views/Error.vue'),

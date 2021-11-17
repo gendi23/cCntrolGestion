@@ -5,14 +5,14 @@
         <!-- logo -->
         <v-card-title class="d-flex align-center justify-center py-7">
           <router-link to="/" class="d-flex align-center">
-          <!--   <v-img
-              :src="require('@/assets/images/logos/logo.svg').default"
+            <v-img
+              :src="require('@/assets/images/logos/logo.png').default"
               max-height="30px"
               max-width="30px"
               alt="logo"
               contain
               class="me-3"
-            ></v-img>-->
+            ></v-img>
 
             <h2 class="text-2xl font-weight-semibold">Conecte-se</h2>
           </router-link>
@@ -34,7 +34,8 @@
               placeholder="john@example.com"
               hide-details
               class="mb-3"
-            ></v-text-field>
+            >
+            </v-text-field>
 
             <v-text-field
               v-model="password"
@@ -51,10 +52,10 @@
               <v-checkbox label="Remember Me" hide-details class="me-3 mt-1"> </v-checkbox>
 
               <!-- forgot link -->
-              <a href="javascript:void(0)" class="mt-1"> Forgot Password? </a>
+              <router-link :to="{ name: 'forgot-password' }" class="mt-1"> Forgot Password? </router-link>
             </div>
 
-            <v-btn block color="primary" class="mt-6" > Login </v-btn>
+            <v-btn block color="primary" class="mt-6" @click="submit()"> Login </v-btn>
             <v-card-text class="d-flex align-center justify-center flex-wrap mt-2">
               <router-link :to="{ name: 'register' }"> Cadastre-se </router-link>
             </v-card-text>
@@ -85,24 +86,6 @@
         </v-card-actions>\-->
       </v-card>
     </div>
-
-    <!-- background triangle shape  -->
-    <img
-      class="auth-mask-bg"
-      height="173"
-      :src="require(`@/assets/images/misc/mask-${$vuetify.theme.dark ? 'dark' : 'light'}.png`).default"
-    />
-
-    <!-- tree -->
-    <v-img class="auth-tree" width="247" height="185" :src="require('@/assets/images/misc/tree.png').default"></v-img>
-
-    <!-- tree  -->
-    <v-img
-      class="auth-tree-3"
-      width="377"
-      height="289"
-      :src="require('@/assets/images/misc/tree-3.png').default"
-    ></v-img>
   </div>
 </template>
 
@@ -158,12 +141,29 @@ export default {
           email : this.email ,
           password : this.password
         }
-        this.postSignUp(DTO);
+        this.postLogin(DTO);
       },
-      /* async postSignUp(data){
-        let response = undefined;
-        response = await AuthRepository.postSignUp(data)
-      } */
+      async postLogin(data){
+        let response = await AuthRepository.postLogin(data)
+        .then((d)=>{
+          console.log(d.data.error)
+          if (d.data.error) {
+            this.$vs.notify({
+                color:"warning",
+                title:d.data.message
+            });
+          }else{
+             this.$vs.notify({
+                color:"success",
+                title:d.data.message
+            });
+            this.$router.push('/dashboard').catch(()=>{});
+          }
+        })
+        .catch((e)=>{
+          console.log(`catch ${e}`)
+        })
+      }
   },
 }
 </script>

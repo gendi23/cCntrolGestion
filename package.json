@@ -10,9 +10,9 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.0",
         "axios": "^0.21",
         "babel-eslint": "^10.1.0",
-        "@vue/cli-plugin-babel": "~4.5.0",
         "deepmerge": "^4.2.2",
         "eslint": "^6.7.2",
         "eslint-plugin-import": "^2.20.2",
@@ -36,6 +36,7 @@
         "vue": "^2.6.11",
         "vue-apexcharts": "^1.6.2",
         "vue-router": "^3.2.0",
+        "vuesax": "^3.12.2",
         "vuetify": "^2.4.0",
         "vuetifyjs-mix-extension": "0.0.20",
         "vuex": "^3.4.0",

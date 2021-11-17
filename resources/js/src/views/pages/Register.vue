@@ -4,11 +4,21 @@
       <v-card class="auth-card">
       
         <!-- title -->
-        <v-card-text  class="d-flex justify-center">
-          <p class="text-2xl font-weight-semibold text--primary mb-2">Cadastro</p>
-         <!-- <p class="mb-2">Make your app management easy and fun!</p>-->
-        </v-card-text>
+        <v-card-title class="d-flex align-center justify-center py-7">
+          <router-link to="/" class="d-flex align-center">
+            <v-img
+              :src="require('@/assets/images/logos/logo.png').default"
+              max-height="30px"
+              max-width="30px"
+              alt="logo"
+              contain
+              class="me-3"
+            ></v-img>
 
+            <h2 class="text-2xl font-weight-semibold">Cadastro</h2>
+          </router-link>
+        </v-card-title>
+        
         <!-- login form -->
         <v-card-text>
           <v-form>
@@ -19,6 +29,7 @@
               placeholder="John "
               hide-details
               class="mb-3"
+              requerid
             ></v-text-field>
             <v-text-field
               v-model="sobrenome"
@@ -76,24 +87,6 @@
 
       </v-card>
     </div>
-
-    <!-- background triangle shape  -->
-    <img
-      class="auth-mask-bg"
-      height="190"
-      :src="require(`@/assets/images/misc/mask-${$vuetify.theme.dark ? 'dark' : 'light'}.png`).default"
-    />
-
-    <!-- tree -->
-    <v-img class="auth-tree" width="247" height="185" :src="require('@/assets/images/misc/tree.png').default"></v-img>
-
-    <!-- tree  -->
-    <v-img
-      class="auth-tree-3"
-      width="377"
-      height="289"
-      :src="require('@/assets/images/misc/tree-3.png').default"
-    ></v-img>
   </div>
 </template>
 
@@ -169,7 +162,25 @@ export default {
     },
     async postSignUp(data){
       let response = undefined;
-      response = await AuthRepository.postSignUp(data)
+      response = await AuthRepository.postSignUp(data).then((d)=>{
+          console.log(d.data.error)
+          if (!d.error) {
+             this.$vs.notify({
+                color:"success",
+                title:d.data.message
+            });
+            this.$router.push('/login').catch(()=>{});
+          
+          }else{
+              this.$vs.notify({
+                color:"warning",
+                title:d.data.message
+            });
+          }
+        })
+        .catch((e)=>{
+          console.log(`catch ${e}`)
+        })
     }
   },
 }
