@@ -7,8 +7,14 @@ import router from './router'
 import store from './store'
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
+import moment from 'moment'
+import './globalcomponents.js';
 
-Vue.use(Vuesax);
+Vue.prototype.moment = moment
+
+Vue.use(Vuesax ,{
+  
+});
 
 Vue.config.productionTip = false
 

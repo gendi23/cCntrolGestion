@@ -15,7 +15,6 @@ class CreateBarcosTable extends Migration
     {
         Schema::create('barcos', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_orden')->nullable();
             $table->string('nome')->nullable();
             $table->integer('numero_IMO')->nullable();
             $table->string('armador')->nullable();

@@ -8,17 +8,19 @@
           <router-link to="/" class="d-flex align-center">
             <v-img
               :src="require('@/assets/images/logos/logo.png').default"
-              max-height="30px"
-              max-width="30px"
+              max-height="1000px"
+              max-width="1000px"
               alt="logo"
               contain
               class="me-3"
             ></v-img>
 
-            <h2 class="text-2xl font-weight-semibold">Cadastro</h2>
           </router-link>
         </v-card-title>
-        
+          <v-card-text class="d-flex d-flex align-center justify-center py-2 ">
+          
+            <h2 class="text-2xl font-weight-semibold">Cadastro</h2>
+        </v-card-text>
         <!-- login form -->
         <v-card-text>
           <v-form>

@@ -13,8 +13,8 @@
       <router-link to="/" class="d-flex align-center text-decoration-none">
         <v-img
           :src="require('@/assets/images/logos/logo.png').default"
-          max-height="30px"
-          max-width="30px"
+          max-height="1000px"
+          max-width="1000px"
           alt="logo"
           contain
           eager
@@ -44,9 +44,12 @@
       <nav-menu-link title="Tables" :to="{ name: 'simple-table' }" :icon="icons.mdiTable"></nav-menu-link>
       <nav-menu-link title="Form Layouts" :to="{ name: 'form-layouts' }" :icon="icons.mdiFormSelect"></nav-menu-link>-->
       <nav-menu-group title="Barcos"  :icon="icons.mdiFileOutline">
-        <nav-menu-link title="Register" :to="{ name: 'barcos-register' }" target="_blank"></nav-menu-link>
-        <nav-menu-link title="List" :to="{ name: 'barcos-lists' }" target="_blank"></nav-menu-link>
+        <nav-menu-link title="Register" :to="{ name: 'barcos-register' }" ></nav-menu-link>
+        <nav-menu-link title="List" :to="{ name: 'barcos-lists' }" ></nav-menu-link>
       </nav-menu-group>
+            <nav-menu-group title="Ordenes"  :icon="icons.mdiFileOutline">
+               <nav-menu-link title="List" :to="{ name: 'ordenes-lists' }" ></nav-menu-link>
+            </nav-menu-group>
     </v-list>
      <!--<a
       href="https://themeselection.com/products/materio-vuetify-vuejs-laravel-admin-template"

@@ -94,6 +94,11 @@ const routes = [
     component: () => import('@/views/barcos/Lists.vue'),
   },
   {
+    path: '/ordenes/lists',
+    name: 'ordenes-lists',
+    component: () => import('@/views/ordenesTrabajo/Lists.vue'),
+  },
+  {
     path: '*',
     redirect: 'error-404',
   },
